@@ -37,7 +37,7 @@ jobs:
       - name: Deploy JMeter Report to GitHub Pages
         if: success()
         env:
-          GH_PAT: ${{secrets.GH_PAT}}
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
            git config --global user.name 'github-actions'
            git config --global user.email 'github-actions@github.com'
