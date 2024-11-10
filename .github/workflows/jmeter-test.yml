@@ -24,7 +24,7 @@ jobs:
 
       # Step 3: Upload JMeter Results as Artifacts
       - name: Upload JMeter Results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: jmeter-results
           path: output
