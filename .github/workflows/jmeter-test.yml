@@ -15,23 +15,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Install JMeter
-      - name: Install JMeter
+      # Step 2: Run JMeter Test in Docker
+      - name: Run JMeter Test in Docker
         run: |
-          sudo apt update
-          sudo apt install -y openjdk-11-jdk wget
-          wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.1.tgz
-          tar -xzf apache-jmeter-5.4.1.tgz
-          export JMETER_HOME=$PWD/apache-jmeter-5.4.1
-          export PATH=$JMETER_HOME/bin:$PATH
-          echo "export JMETER_HOME=$JMETER_HOME" >> $GITHUB_ENV
-          echo "export PATH=$JMETER_HOME/bin:\$PATH" >> $GITHUB_ENV
+          docker run --rm -v ${{ github.workspace }}:/jmeter -w /jmeter justb4/jmeter:5.4.1 \
+          -n -t test-plan.jmx -l results.jtl -e -o output
 
-      # Step 3: Run JMeter Test
-      - name: Run JMeter Test
-        run: jmeter -n -t test-plan.jmx -l results.jtl -e -o output
-
-      # Step 4: Upload JMeter Results as Artifacts
+      # Step 3: Upload JMeter Results as Artifacts
       - name: Upload JMeter Results
         uses: actions/upload-artifact@v3
         with:
