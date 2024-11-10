@@ -24,11 +24,12 @@ jobs:
           tar -xzf apache-jmeter-5.4.1.tgz
           export JMETER_HOME=$PWD/apache-jmeter-5.4.1
           export PATH=$JMETER_HOME/bin:$PATH
+          echo "export JMETER_HOME=$JMETER_HOME" >> $GITHUB_ENV
+          echo "export PATH=$JMETER_HOME/bin:\$PATH" >> $GITHUB_ENV
 
       # Step 3: Run JMeter Test
       - name: Run JMeter Test
-        run: |
-          jmeter -n -t test-plan.jmx -l results.jtl -e -o output
+        run: jmeter -n -t test-plan.jmx -l results.jtl -e -o output
 
       # Step 4: Upload JMeter Results as Artifacts
       - name: Upload JMeter Results
