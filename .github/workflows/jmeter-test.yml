@@ -22,6 +22,7 @@ jobs:
           sudo apt install -y openjdk-11-jdk wget
           wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.1.tgz
           tar -xzf apache-jmeter-5.4.1.tgz
+          ls
 
       # Step 3: Run JMeter Test
       - name: Run JMeter Test
