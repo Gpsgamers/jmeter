@@ -39,9 +39,7 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-           git remote add origin https://github.com/Gpsgamers/page.git
            git branch -M main
-           git push -u origin main
            ls     
            cp -r output/* .
             rm -rf apache-jmeter-5.4.1
