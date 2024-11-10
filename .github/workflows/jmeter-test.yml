@@ -39,13 +39,13 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-           git config --global user.name 'github-actions'
-           git config --global user.email 'github-actions@github.com'
-           git fetch origin
-           git checkout -B gh-pages
+           git remote add origin https://github.com/Gpsgamers/page.git
+           git branch -M main
+           git push -u origin main
            ls     
            cp -r output/* .
-            rm -rf ./*
+            rm -rf apache-jmeter-5.4.1
+            rm -rf apache-jmeter-5.4.1.tgz
            git add .
            git commit -m "Deploy JMeter report to GitHub Pages"
            git push --force "https://${GH_PAT}@github.com/Gpsgamers/page.git" gh-pages
