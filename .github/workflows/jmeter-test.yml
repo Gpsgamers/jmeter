@@ -23,8 +23,7 @@ jobs:
           wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.1.tgz
           tar -xzf apache-jmeter-5.4.1.tgz
           ls
-          cd /apache-jmeter-5.4.1
-          ls
+          cd /apache-jmeter-5.4.1/bin
 
       # Step 3: Run JMeter Test
       - name: Run JMeter Test
