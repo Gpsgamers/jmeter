@@ -1,0 +1,30 @@
+name: Run JMeter Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  jmeter-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Use Docker to Run JMeter Test
+      - name: Run JMeter Test
+        uses: marktnoonan/jmeter-action@v2.0.1
+        with:
+          test_files: 'test-plan.jmx' # or path/to/test-plan.jmx if stored in a subfolder
+          jmeter_args: '-n -t test-plan.jmx -l results.jtl -e -o output'
+
+      # Step 3: Upload JMeter Results as Artifacts
+      - name: Upload JMeter Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: jmeter-results
+          path: output
