@@ -22,12 +22,10 @@ jobs:
           sudo apt install -y openjdk-11-jdk wget
           wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.1.tgz
           tar -xzf apache-jmeter-5.4.1.tgz
-          cd apache-jmeter-5.4.1
-          ls
 
       # Step 3: Run JMeter Test
       - name: Run JMeter Test
-        run: jmeter -n -t test-plan.jmx -l results.jtl -e -o output
+        run: apache-jmeter-5.4.1/bin/jmeter -n -t test-plan.jmx -l results.jtl -e -o output
 
       # Step 4: Upload JMeter Results as Artifacts
       - name: Upload JMeter Results
