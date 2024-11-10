@@ -33,17 +33,3 @@ jobs:
         with:
           name: jmeter-results
           path: output
-
-      - name: Deploy JMeter Report to GitHub Pages
-        if: success()
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-           git branch -M main
-           ls     
-           cp -r output/* .
-            rm -rf apache-jmeter-5.4.1
-            rm -rf apache-jmeter-5.4.1.tgz
-           git add .
-           git commit -m "Deploy JMeter report to GitHub Pages"
-           git push --force "https://${GH_PAT}@github.com/Gpsgamers/page.git" gh-pages
