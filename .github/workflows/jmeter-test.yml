@@ -37,8 +37,8 @@ jobs:
           git config --global user.email 'github-actions@github.com'
           git checkout --orphan gh-pages
           pwd
-          ls -lrt
-          cd /output
+          ls
+          cd output
           git add .
           git commit -m "Deploy JMeter report"
           git push --force origin gh-pages
