@@ -22,7 +22,9 @@ jobs:
           tar -xzf apache-jmeter-5.4.1.tgz
           
       - name: Run JMeter Test
-        run: apache-jmeter-5.4.1/bin/jmeter -n -t test-plan.jmx -l results.jtl -e -o output
+        run: |
+          pwd
+          apache-jmeter-5.4.1/bin/jmeter -n -t test-plan.jmx -l results.jtl -e -o output
 
       - name: Upload JMeter Results
         uses: actions/upload-artifact@v3
