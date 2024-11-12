@@ -23,7 +23,6 @@ jobs:
           
       - name: Run JMeter Test
         run: |
-          pwd
           apache-jmeter-5.4.1/bin/jmeter -n -t test-plan.jmx -l results.jtl -e -o output
 
       - name: Upload JMeter Results
@@ -39,9 +38,7 @@ jobs:
           git checkout --orphan gh-pages
           pwd
           ls -lrt
-          rm -rf ./*
-          ls
-          cp -r output/* .
+          cd /output
           git add .
           git commit -m "Deploy JMeter report"
           git push --force origin gh-pages
