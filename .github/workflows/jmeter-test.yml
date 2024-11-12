@@ -1,0 +1,42 @@
+name: Run JMeter Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  jmeter-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install JMeter
+        run: |
+          sudo apt update
+          sudo apt install -y openjdk-11-jdk wget
+          wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.1.tgz
+          tar -xzf apache-jmeter-5.4.1.tgz
+          
+      - name: Run JMeter Test
+        run: |
+          apache-jmeter-5.4.1/bin/jmeter -n -t test-plan.jmx -l results.jtl -e -o output
+
+      - name: Upload JMeter Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: jmeter-results
+          path: output
+          
+      - name: deployment
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git checkout --orphan gh-pages
+          cd output
+          git add .
+          git commit -m "Deploy JMeter report"
+          git push --force origin gh-pages
