@@ -26,7 +26,7 @@ jobs:
           apache-jmeter-5.4.1/bin/jmeter -n -t test-plan.jmx -l results.jtl -e -o output
 
       - name: Upload JMeter Results
-        uses: actions/upload-artifact@v4
+        uses: actions/artifact@v4
         with:
           name: jmeter-results
           path: output
